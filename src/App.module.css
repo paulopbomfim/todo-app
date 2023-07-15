@@ -1,0 +1,43 @@
+.headerContainer {
+  width: 100%;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  background: var(--gray-700);
+}
+
+.mainContainer {
+  width: 100%;
+  margin-top: -1.5rem;
+}
+
+.mainContainer .taskForm {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.taskForm input {
+  padding: 1rem;
+  width: 37.5rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--gray-500);
+  color: var(--gray-100);
+}
+
+.taskForm button {
+  padding: 0 1rem;
+  border-radius: 8px;
+  background-color: var(--blue-700);
+  color: var(--gray-100);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+}
