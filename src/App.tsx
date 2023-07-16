@@ -1,10 +1,37 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { PlusCircle } from 'phosphor-react';
 
 import styles from'./App.module.css';
 import todoLogo from './assets/Logo.svg';
 import { Tasks } from './components/Tasks';
 
+export interface Task {
+  id: string;
+  content: string;
+  status: boolean;
+}
+
 export function App() {
+  const [taskContent, setTasksContent] = useState('');
+  const [totalTasks, setTotalTasks] = useState<Task[]>([]);
+  const [completedTasks, setCompletedTasks] = useState(0);
+
+  function handleChangeTaskInput(event: ChangeEvent<HTMLInputElement>) {
+    setTasksContent(event.target.value);
+  }
+
+  function handleSubmitTask(event: FormEvent) {
+    event.preventDefault();
+
+    const newTask: Task = {
+      id: self.crypto.randomUUID(),
+      content: taskContent,
+      status: false
+    };
+
+    setTotalTasks((state) => [...state, newTask])
+    setTasksContent('');
+  }
 
   return (
     <>
@@ -14,15 +41,21 @@ export function App() {
 
 
       <main className={ styles.mainContainer }>
-        <form className={ styles.taskForm }>
+        <form
+          onSubmit={ handleSubmitTask }
+          className={ styles.taskForm }
+        >
           <input
             className={ styles.taskInput }
             type="text"
             placeholder='Adicione uma nova tarefa'
+            value={ taskContent }
+            onChange={ handleChangeTaskInput }
             required
           />
           <button
             type="submit"
+            disabled={ taskContent.length < 1 }
             className={ styles.taskSubmitButton }
           >
             Criar
@@ -30,7 +63,12 @@ export function App() {
           </button>
         </form>
 
-        <Tasks />
+        <Tasks
+          allTasks={ totalTasks }
+          totalTasks={ totalTasks.length }
+          completedTasks={ completedTasks }
+          setTotalTasks={ setTotalTasks }
+        />
       </main>
     </>
   )

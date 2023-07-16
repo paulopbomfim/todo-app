@@ -46,9 +46,14 @@
   gap: 0.5rem;
   cursor: pointer;
   border: none;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
-.taskForm button:hover {
+.taskForm button:not(:disabled):hover {
   background-color: var(--blue-500);
+}
+
+.taskForm button[type=submit]:disabled {
+  filter: brightness(0.7);
+  cursor: not-allowed;
 }

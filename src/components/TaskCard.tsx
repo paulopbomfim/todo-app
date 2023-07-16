@@ -1,18 +1,51 @@
+import { useState } from 'react';
+
 import { CheckCircle, Trash } from 'phosphor-react';
+
 
 import styles from './TaskCard.module.css';
 
-export function TaskCard() {
+interface TaskProp {
+  id: string
+  content: string;
+  status: boolean;
+  onDeleteTask: (id: string) => void;
+  onToggleTaskStatus: (id: string) => void;
+}
+
+export function TaskCard({ id, content, status, onToggleTaskStatus, onDeleteTask }: TaskProp) {
+  const [isTaskCompleted, setIsTaskCompleted] = useState(false);
+
+  function handleDeleteTask() {
+    onDeleteTask(id);
+  }
+
+  function handleToggleTaskStatus() {
+    const updatedTask = !isTaskCompleted;
+    setIsTaskCompleted(updatedTask);
+
+  }
+
   return (
     <div className={ styles.taskCardContainer }>
-      <label className={ styles.taskCheckbox }>
-        <div className={ styles.taskCheckboxWrapper}>
-          <input type="checkbox"/>
-          <span><CheckCircle size={32} weight="bold" /></span>
-        </div>
-      </label>
-      <p className={ styles.taskTextCompleted }>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae odio libero porro consequatur eos, voluptates voluptatibus? Officia autem fugit quisquam vitae. Aliquam obcaecati esse quo officiis in laborum corporis cupiditate.</p>
-      <button type="button" className={ styles.excludeTaskButton }>
+      <div className={ styles.taskCheckboxAndContentWrapper }>
+        <label className={ styles.taskCheckbox }>
+          <div className={ styles.taskCheckboxWrapper}>
+            <input
+              type="checkbox"
+              onChange={ handleToggleTaskStatus }
+            />
+            <span><CheckCircle size={32} weight="bold" /></span>
+          </div>
+        </label>
+        <p className={ isTaskCompleted ? styles.taskTextCompleted : styles.taskText }>{ content }</p>
+      </div>
+
+      <button
+        type="button"
+        onClick={ handleDeleteTask }
+        className={ styles.excludeTaskButton }
+      >
         <Trash weight='bold' size={20}/>
       </button>
     </div>
