@@ -2,6 +2,7 @@ import { PlusCircle } from 'phosphor-react';
 
 import styles from'./App.module.css';
 import todoLogo from './assets/Logo.svg';
+import { Tasks } from './components/Tasks';
 
 export function App() {
 
@@ -18,6 +19,7 @@ export function App() {
             className={ styles.taskInput }
             type="text"
             placeholder='Adicione uma nova tarefa'
+            required
           />
           <button
             type="submit"
@@ -27,6 +29,8 @@ export function App() {
             <PlusCircle weight='bold' size={20}/>
           </button>
         </form>
+
+        <Tasks />
       </main>
     </>
   )

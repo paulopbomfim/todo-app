@@ -1,0 +1,89 @@
+.taskCardContainer {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--gray-400);
+}
+
+.taskCheckboxWrapper{
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.taskCheckboxWrapper input{
+  visibility: hidden;
+ }
+
+.taskCheckboxWrapper span {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: transparent;
+  border: 2px solid var(--blue-500);
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: all 0.2s;
+}
+
+.taskCheckboxWrapper span:hover {
+  border: 2px solid var(--blue-700);
+}
+
+.taskCheckboxWrapper input:checked + span {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--purple-700);
+  background: var(--purple-700);
+  color: var(--gray-100);
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: all 0.2s;
+}
+
+.taskCheckboxWrapper input:checked + span:hover {
+  border: 2px solid var(--purple-500);
+  background: var(--purple-500);
+}
+
+
+.taskText {
+  font-size: 1rem;
+  color: var(--gray-100);
+  line-height: 1.4;
+}
+
+.taskTextCompleted {
+  font-size: 1rem;
+  color: var(--gray-300);
+  line-height: 1.4;
+  text-decoration: line-through;
+}
+
+.excludeTaskButton {
+  font-size: 0;
+  background: none;
+  border: none;
+  color: var(--gray-300);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.25rem;
+}
+
+.excludeTaskButton:hover {
+  color: var(--red-500);
+}

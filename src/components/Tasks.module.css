@@ -1,0 +1,35 @@
+.tasksContainer {
+  margin: 4rem auto 0;
+}
+
+.tasksContainer header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasksMarker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding-left: 0.2rem;
+}
+
+.marker {
+  background: var(--gray-400);
+  padding: 0.15rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray-100);
+  line-height: 1.6;
+}
+
+.createdTasks {
+  color: var(--blue-500);
+}
+
+.concludedTasks {
+  color: var(--purple-500);
+}
