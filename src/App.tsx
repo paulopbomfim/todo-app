@@ -8,13 +8,12 @@ import { Tasks } from './components/Tasks';
 export interface Task {
   id: string;
   content: string;
-  status: boolean;
 }
 
 export function App() {
   const [taskContent, setTasksContent] = useState('');
   const [totalTasks, setTotalTasks] = useState<Task[]>([]);
-  const [completedTasks, setCompletedTasks] = useState(0);
+  const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
 
   function handleChangeTaskInput(event: ChangeEvent<HTMLInputElement>) {
     setTasksContent(event.target.value);
@@ -25,8 +24,7 @@ export function App() {
 
     const newTask: Task = {
       id: self.crypto.randomUUID(),
-      content: taskContent,
-      status: false
+      content: taskContent
     };
 
     setTotalTasks((state) => [...state, newTask])
@@ -66,8 +64,10 @@ export function App() {
         <Tasks
           allTasks={ totalTasks }
           totalTasks={ totalTasks.length }
-          completedTasks={ completedTasks }
+          allCompletedTasks={ completedTasks }
+          completedTasks={ completedTasks.length }
           setTotalTasks={ setTotalTasks }
+          setCompletedTasks={ setCompletedTasks }
         />
       </main>
     </>

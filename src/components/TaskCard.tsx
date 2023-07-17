@@ -4,26 +4,26 @@ import { CheckCircle, Trash } from 'phosphor-react';
 
 
 import styles from './TaskCard.module.css';
+import { Task } from '../App';
 
 interface TaskProp {
   id: string
   content: string;
-  status: boolean;
-  onDeleteTask: (id: string) => void;
-  onToggleTaskStatus: (id: string) => void;
+  onDeleteTask: (id: string, task: Task) => void;
+  onToggleTaskStatus: (id: string, task: Task) => void;
 }
 
-export function TaskCard({ id, content, status, onToggleTaskStatus, onDeleteTask }: TaskProp) {
+export function TaskCard({ id, content, onToggleTaskStatus, onDeleteTask }: TaskProp) {
   const [isTaskCompleted, setIsTaskCompleted] = useState(false);
 
   function handleDeleteTask() {
-    onDeleteTask(id);
+    onDeleteTask(id, {id, content});
   }
 
   function handleToggleTaskStatus() {
     const updatedTask = !isTaskCompleted;
     setIsTaskCompleted(updatedTask);
-
+    onToggleTaskStatus(id, {id, content})
   }
 
   return (

@@ -10,20 +10,27 @@ import styles from './Tasks.module.css';
 interface TaskProp {
   allTasks: Task[];
   totalTasks: number;
+  allCompletedTasks: Task[];
   completedTasks: number;
   setTotalTasks: Dispatch<SetStateAction<Task[]>>
-  // setTaskStatus: Dispatch<SetStateAction<Task[]>>
+  setCompletedTasks: Dispatch<SetStateAction<Task[]>>
 }
 
-export function Tasks({allTasks, totalTasks, completedTasks, setTotalTasks}: TaskProp) {
+export function Tasks({allTasks, totalTasks, allCompletedTasks, completedTasks, setTotalTasks, setCompletedTasks}: TaskProp) {
 
-  function handleDeleteTask(id: string) {
+  function handleDeleteTask(id: string, task: Task) {
     const tasksWithoutDeletedOne = allTasks.filter(task => task.id !== id);
     setTotalTasks(tasksWithoutDeletedOne);
+    handleToggleTaskStatus(id, task)
   }
 
-  function handleToggleTaskStatus() {
-    // setTaskStatus(state => !state)
+  function handleToggleTaskStatus(id: string, task: Task) {
+    if (allCompletedTasks.find(item => item.id === id)) {
+      const tasksWithoutUncompletedOne = allCompletedTasks.filter(row => row.id !== id)
+      setCompletedTasks(tasksWithoutUncompletedOne)
+    } else {
+      setCompletedTasks(state => [...state, task])
+    }
   }
 
   return (
@@ -50,7 +57,6 @@ export function Tasks({allTasks, totalTasks, completedTasks, setTotalTasks}: Tas
                   key={ task.id }
                   id={ task.id }
                   content={ task.content }
-                  status={ task.status }
                   onDeleteTask={ handleDeleteTask }
                   onToggleTaskStatus={ handleToggleTaskStatus }
                 />
